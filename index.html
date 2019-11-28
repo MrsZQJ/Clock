@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 95%;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>canvas</title>
+</head>
+
+<body style="height: 100%;">
+    <canvas id="canvas" style="border: 1px solid skyblue;height: 100%;"></canvas>
+</body>
+<!-- <script src="digit.js"></script>
+<script src="con.js"></script> -->
+<script>
+    digit = [
+        [
+            [0, 0, 1, 1, 1, 0, 0],
+            [0, 1, 1, 0, 1, 1, 0],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [0, 1, 1, 0, 1, 1, 0],
+            [0, 0, 1, 1, 1, 0, 0]
+        ], //0
+        [
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 1, 1, 1, 1, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [1, 1, 1, 1, 1, 1, 1]
+        ], //1
+        [
+            [0, 1, 1, 1, 1, 1, 0],
+            [1, 1, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 1, 1, 0, 0, 0],
+            [0, 1, 1, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1]
+        ], //2
+        [
+            [1, 1, 1, 1, 1, 1, 1],
+            [0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 1, 1, 1, 0, 0],
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [0, 1, 1, 1, 1, 1, 0]
+        ], //3
+        [
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 1, 1, 1, 0],
+            [0, 0, 1, 1, 1, 1, 0],
+            [0, 1, 1, 0, 1, 1, 0],
+            [1, 1, 0, 0, 1, 1, 0],
+            [1, 1, 1, 1, 1, 1, 1],
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 1, 1, 1, 1]
+        ], //4
+        [
+            [1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 0, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0, 0, 0],
+            [1, 1, 1, 1, 1, 1, 0],
+            [0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [0, 1, 1, 1, 1, 1, 0]
+        ], //5
+        [
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 1, 1, 0, 0, 0],
+            [0, 1, 1, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0, 0, 0],
+            [1, 1, 0, 1, 1, 1, 0],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [0, 1, 1, 1, 1, 1, 0]
+        ], //6
+        [
+            [1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 1, 1, 0, 0, 0]
+        ], //7
+        [
+            [0, 1, 1, 1, 1, 1, 0],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [0, 1, 1, 1, 1, 1, 0],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [0, 1, 1, 1, 1, 1, 0]
+        ], //8
+        [
+            [0, 1, 1, 1, 1, 1, 0],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [0, 1, 1, 1, 0, 1, 1],
+            [0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 1, 1, 0, 0, 0, 0]
+        ], //9
+        [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 1, 1, 0],
+            [0, 1, 1, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 1, 1, 0],
+            [0, 1, 1, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+        ] //:
+    ];
+
+
+    var RADIUS = 5,
+        MARGIN_LEFT = 30,
+        MARGIN_TOP = 60,
+        // END_TIME = new Date(),
+        colors = ["#33B5E5", "#0099CC", "#AA66CC", "#9933CC", "#99CC00", "#669900", "#FFBB33", "#FF8800", "#FF4444",
+            "#CC0000"
+        ],
+        balls = [],
+        currentTime = NaN
+
+
+    // END_TIME.setTime(END_TIME.getTime()+3600*1000)
+    window.onload = function () {
+        WINDOW_WIDTH = document.body.clientWidth
+        WINDOW_HEIGHT = document.body.clientHeight
+        this.MARGIN_LEFT = 10
+        this.RADIUS = Math.round(this.WINDOW_WIDTH * 4 / 5 / 108) - 1
+        var canvas = document.getElementById('canvas')
+        canvas.width = this.WINDOW_WIDTH
+        canvas.height = WINDOW_HEIGHT
+        ctx = canvas.getContext('2d')
+        currentTime = time_count()
+        setInterval(() => {
+            render(ctx)
+            updata()
+        }, 50);
+    }
+
+    function updata() {
+        var nowTime = time_count()
+        var nowThour = parseInt(nowTime / 3600)
+        var nowTminutes = parseInt((nowTime - nowThour * 3600) / 60)
+        var nowTseconds = nowTime % 60
+
+        var currenthour = parseInt(currentTime / 3600)
+        var currentminutes = parseInt((currentTime - currenthour * 3600) / 60)
+        var currentseconds = currentTime % 60
+        if (nowTime != currentTime) {
+            if (parseInt(nowThour / 10) != parseInt(currenthour / 10)) {
+                addBalls(MARGIN_LEFT, MARGIN_TOP, parseInt(nowThour / 10))
+            }
+            if (parseInt(nowThour % 10) != parseInt(currenthour % 10)) {
+                addBalls(MARGIN_LEFT + 15 * (RADIUS + 1), MARGIN_TOP, parseInt(nowThour % 10))
+            }
+            if (parseInt(nowTminutes / 10) != parseInt(currentminutes / 10)) {
+                addBalls(MARGIN_LEFT + 39 * (RADIUS + 1), MARGIN_TOP, parseInt(nowTminutes / 10))
+            }
+            if (parseInt(nowTminutes % 10) != parseInt(currentminutes % 10)) {
+                addBalls(MARGIN_LEFT + 54 * (RADIUS + 1), MARGIN_TOP, parseInt(nowTminutes % 10))
+            }
+            if (parseInt(nowTseconds / 10) != parseInt(currentseconds / 10)) {
+                addBalls(MARGIN_LEFT + 78 * (RADIUS + 1), MARGIN_TOP, parseInt(nowTseconds / 10))
+            }
+            if (parseInt(nowTseconds % 10) != parseInt(currentseconds % 10)) {
+                addBalls(MARGIN_LEFT + 93 * (RADIUS + 1), MARGIN_TOP, parseInt(nowTseconds % 10))
+            }
+            currentTime = nowTime
+        }
+        updateBalls()
+    }
+
+    function updateBalls() {
+
+        for (var i = 0; i < balls.length; i++) {
+            balls[i].x += balls[i].vx
+            balls[i].y += balls[i].vy
+            balls[i].vy += balls[i].g
+            if (balls[i].y >= ctx.canvas.height - balls[i].r) {
+                balls[i].y = ctx.canvas.height - balls[i].r
+                balls[i].vy = -balls[i].vy * .6
+            }
+            if (balls[i].x >= ctx.canvas.width - balls[i].r) {
+                balls.splice(i, 1)
+            }
+            if (balls[i].x <= 0 + balls[i].r) {
+                balls.splice(i, 1)
+            }
+        }
+    }
+
+    function addBalls(x, y, num) {
+        for (var i = 0; i < digit[num].length; i++) {
+            for (var j = 0; j < digit[num][i].length; j++) {
+                if (digit[num][i][j] == 1) {
+                    var aball = {
+                        x: x + j * 2 * (RADIUS + 1) + (RADIUS + 1),
+                        y: y + i * 2 * (RADIUS + 1) + (RADIUS + 1),
+                        r: RADIUS,
+                        g: 1.5 + Math.random(),
+                        vx: Math.pow(-1, Math.ceil(Math.random() * 10)) * 4,
+                        vy: -5,
+                        color: colors[Math.floor(Math.random() * colors.length)]
+                    }
+                    balls.push(aball)
+                }
+            }
+        }
+    }
+
+    function time_count() {
+        var tim = new Date()
+        var ret = tim.getHours() * 3600 + tim.getMinutes() * 60 + tim.getSeconds()
+        return ret
+    }
+    // function time_count() {
+    //     var tim = new Date()
+    //     var ret = END_TIME.getTime() - tim.getTime()
+    //     ret = Math.round(ret / 1000)
+    //     return ret >= 0 ? ret : 0
+    // }
+
+    function render(ctx) {
+        var currentRet = time_count()
+        var hour = 12,
+            minutes = 34,
+            seconds = 56
+
+        hour = parseInt(currentRet / 3600)
+        minutes = parseInt((currentRet - hour * 3600) / 60)
+        seconds = currentRet % 60
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+        renderDigit(MARGIN_LEFT, MARGIN_TOP, parseInt(hour / 10), ctx)
+        renderDigit(MARGIN_LEFT + 15 * (RADIUS + 1), MARGIN_TOP, parseInt(hour % 10), ctx)
+        renderDigit(MARGIN_LEFT + 30 * (RADIUS + 1), MARGIN_TOP, 10, ctx)
+        renderDigit(MARGIN_LEFT + 39 * (RADIUS + 1), MARGIN_TOP, parseInt(minutes / 10), ctx)
+        renderDigit(MARGIN_LEFT + 54 * (RADIUS + 1), MARGIN_TOP, parseInt(minutes % 10), ctx)
+        renderDigit(MARGIN_LEFT + 69 * (RADIUS + 1), MARGIN_TOP, 10, ctx)
+        renderDigit(MARGIN_LEFT + 78 * (RADIUS + 1), MARGIN_TOP, parseInt(seconds / 10), ctx)
+        renderDigit(MARGIN_LEFT + 93 * (RADIUS + 1), MARGIN_TOP, parseInt(seconds % 10), ctx)
+        for (var i = 0; i < balls.length; i++) {
+            ctx.fillStyle = balls[i].color;
+
+            ctx.beginPath();
+            ctx.arc(balls[i].x, balls[i].y, RADIUS, 0, 2 * Math.PI, true);
+            ctx.closePath();
+
+            ctx.fill();
+        }
+    }
+
+    function renderDigit(x, y, num, ctx) {
+        ctx.fillStyle = 'skyblue'
+        for (var i = 0; i < digit[num].length; i++) {
+            for (var j = 0; j < digit[num][i].length; j++) {
+                if (digit[num][i][j] == 1) {
+                    ctx.beginPath()
+                    ctx.arc(x + j * 2 * (RADIUS + 1) + (RADIUS + 1), y + i * 2 * (RADIUS + 1) + (RADIUS + 1), RADIUS, 0,
+                        2 * Math.PI)
+                    ctx.fill()
+                }
+            }
+        }
+    }
+</script>
+
+</html>
